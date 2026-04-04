@@ -12,6 +12,12 @@ app.get("/",(req,res)=>{
     res.render("index");
 });
 
+app.get("/profile/:username",(req,res)=>{  
+    // dynamic routing will work like this 
+     // Access the username parameter from the URL
+    res.send(`welcome ${req.params.username}`);
+});
+
 app.listen(3000,()=>{
     console.log("Server is running on port 3000");
 });
