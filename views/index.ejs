@@ -9,13 +9,26 @@
 <body>
     <div class="main w-full bg-gray-950 min-h-screen color-gray-50 text-white">
         <div class="form p-10 ">
-            <form action="">
-                <input class="block w-full rounded-md mt-5 bg-zinc-900 p-2 " ="text" placeholder="enter your task">
-                <textarea class="block w-full rounded-md mt-5 bg-zinc-900 p-2 resize-none" placeholder="enter your task description"></textarea>
+            <form action="/create" method="post">
+                <input class="block w-full  rounded-md mt-5 bg-zinc-900 p-2 "type="text" placeholder="enter your task" name="title">
+                <textarea class="block w-full rounded-md mt-5 bg-zinc-900 p-2 resize-none" placeholder="enter your task description" name="details"></textarea>
                 <input class="mt-3 bg-blue-500 px-5 py-2 rounded-md "  type="submit" value="create Task">
             </form>
         </div>
-        <div class="tasks"></div>
+        <div class="tasks p-10 flex flex-wrap gap-4">
+            <% if(files.length >0){ %>
+                <% files.forEach((val)=>{ %>
+                    <div class="task min-w-72  px-3 py-4 bg-zinc-800 rounded-md ">
+                      <h1 class="text-3xl tracking-tighter"><%=val %></h1>
+                      <a class="text-blue-500 inline-block mt-3" href="">Read More</a>
+                    </div>
+              <%  })  %> 
+               
+            <% } else{ %>
+                <h3 class="text-zinc-600">No tasks created yet</h3>
+           <% }%>
+               
+        </div>
     </div>
 
     <script src="/javascripts/script.js"></script>
