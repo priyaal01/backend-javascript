@@ -25,6 +25,35 @@ app.post("/create",(req,res)=>{
         })
 });
 
+app.get("/files/:filename",(req,res)=>{
+    const filename=req.params.filename;
+    fs.readFile(`./files/${filename}`,"utf-8",(err,data)=>{
+        if(err){
+            console.log(err);
+        }else{
+            res.render("file",{filename:filename,data:data});
+        }
+    })
+});
+
+app.get("/edit/:filename",(req,res)=>{
+    const filename=req.params.filename;
+    res.render("edit",{filename:filename});
+
+});
+
+app.post("/edit",(req,res)=>{
+    const filename=req.body.previous;
+    const newFilename=req.body.new;
+    fs.rename(`./files/${filename}`, `./files/${newFilename}`, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect("/");
+        }
+    });
+});
+
 app.listen(3000,()=>{
     console.log("Server is running on port 3000");
 });
